@@ -32,8 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _gradeController = TextEditingController();
 
-  // TODO: String, String türünde bir Map oluşturunuz.
-
+  // TODO: Boş olamaz String, Boş olabilir String türünde bir Map oluşturunuz.
 
   /* TODO: Girilen sayılara göre harf notu hesaplayan bir metot yazınız.
   *   AA: >=85
@@ -64,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ""),
                       leading: Text(
                           // TODO: Oluşturduğunuz Map içindeki Harf Notlarını ekranda gösteriniz.
+                          // Eğer veri boş ise "Veri Girilmedi" yazmalıdır.
                           ""),
                     ))),
           ),
