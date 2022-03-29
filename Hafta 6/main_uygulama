@@ -1,0 +1,121 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _gradeController = TextEditingController();
+
+  // TODO: String, String türünde bir Map oluşturunuz.
+
+
+  /* TODO: Girilen sayılara göre harf notu hesaplayan bir metot yazınız.
+  *   AA: >=85
+  *   BB: >=70
+  *   CC: >=60
+  *   DD: >=50
+  *   FF: <50
+  * */
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Student Grades App'),
+        ),
+        body: Column(children: [
+          Expanded(
+            child: ListView.builder(
+                shrinkWrap: true,
+                // TODO: itemCount değişkenine oluşturduğunuz Map uzunluğunu veriniz.
+                itemCount: 0,
+                itemBuilder: (context, index) => Card(
+                  margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        child: ListTile(
+                      title: Text(
+                          // TODO: Oluşturduğunuz Map içindeki isimleri ekranda gösteriniz.
+                          ""),
+                      leading: Text(
+                          // TODO: Oluşturduğunuz Map içindeki Harf Notlarını ekranda gösteriniz.
+                          ""),
+                    ))),
+          ),
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(children: [
+                  Flexible(
+                      child: Container(
+                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+                          alignment: Alignment.center,
+                          child: TextField(
+                              controller: _nameController,
+                              decoration: const InputDecoration(
+                                labelText: "Enter Name",
+                                border: OutlineInputBorder(),
+                              )))),
+                  Flexible(
+                      child: Container(
+                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+                          alignment: Alignment.center,
+                          child: TextField(
+                              controller: _gradeController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(
+                                labelText: "Enter Grade",
+                                border: OutlineInputBorder(),
+                              ))))
+                ])
+              ]),
+          Container(
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+              child: ElevatedButton.icon(
+                icon: const Icon(Icons.add),
+                style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(45)),
+                label: const Text(
+                  "Add Student",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+                onPressed: () => setState(() {
+                  /*  TODO: Oluşturduğunuz metota _gradeController içindeki değeri gönderiniz.
+                  *   TODO: Hesaplanan harf notunu oluşturduğunuz Map içine kaydedin.
+                  * */
+
+                  _nameController.clear();
+                  _gradeController.clear();
+                }),
+              )),
+        ]));
+  }
+}
