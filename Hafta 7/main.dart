@@ -2,27 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
-Future<List<Comments>> fetchComments([String? pId]) async {
-  var response;
-
-  if (pId == '') {
-    response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/comments'));
-  } else {
-    response = await http.get(
-        Uri.parse('https://jsonplaceholder.typicode.com/comments?id=$pId'));
-  }
-
-  if (response.statusCode == 200) {
-    final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
-
-    return parsed.map<Comments>((json) => Comments.fromJson(json)).toList();
-  } else {
-    throw Exception('Başarısız');
-  }
-}
+// TODO: Bu haftaki çalışmada sahte api üzerinden veri çekmeniz ve çekilen veriyi göstermeniz beklenmektedir.
+// TODO 1: http paketini yapılacak örnek uygulamaya yükleyin ve paketi import ediniz.
 
 class Comments {
   final int postId;
@@ -61,16 +43,37 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final TextEditingController? _idControlller = TextEditingController();
 
+  // TODO 2: final türünde şimdiki zamanı tutan bir değişken oluşturunuz.
+
+  // TODO 3: Get işlemi için aşağıdaki fetchComments() metotunu kullanmanız beklenmektedir.
+  // TODO 4: Örnek işlem için "https://pub.dev/packages/http" sayfasını kullanınız.
+
+  /// Eğer [pId] boş ise;     URL 1: https://jsonplaceholder.typicode.com/comments
+  ///
+  /// Eğer [pId] boş değilse; URL 2: https://jsonplaceholder.typicode.com/comments?id=id_değeri
+  Future<List<Comments>> fetchComments([String? pId]) async {
+    var response;
+
+    // TODO 5: Eğer String? pId boş metin ise ('') bütün listeyi get metoduyla response değişkenine atanmalıdır.
+    // TODO 6: Eğer pId boş metin değilse ilgili id değerine ait değer response değişkenine atanmalıdır.
+
+
+    // TODO 7: [false] kısmını geri dönen [statusCode] 200 ise cevabı yazdıracak şekilde değiştirin.
+    if (false) {
+      var parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+      return parsed.map<Comments>((json) => Comments.fromJson(json)).toList();
+    } else {
+      // TODO 8: Eğer kod farklı ise hata fırlatınız.
+      return throw UnimplementedError();
+    }
+  }
 
   @override
   void initState() {
     super.initState();
   }
-
-  final TextEditingController? _idControlller = TextEditingController();
-
-  final tarih = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +89,9 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [Text("Tarih: $tarih"),
-
+          children: [
+            // TODO 9: final türünde oluşturduğunuz değişkeni Text widget'ıyla ekrana bastırınız.
+            Text("Tarih: "),
             Expanded(
               child: FutureBuilder<List<Comments>>(
                 future: fetchComments(_idControlller?.text),
